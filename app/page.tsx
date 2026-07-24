@@ -44,6 +44,7 @@ export default function HomePage() {
   useEffect(() => {
     let active = true;
 
+    // @ts-ignore: TypeScript'in bu kütüphane için tip sormasını engelliyoruz
     import("qrcode")
       .then((QRCode) => QRCode.toDataURL(token, { width: 280, margin: 2 }))
       .then((url) => {
