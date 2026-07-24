@@ -98,10 +98,11 @@ export default function HomePage() {
           setStatus("Geçersiz QR. Lütfen doğru QR kodunu okutun.");
         }
       },
+      // TypeScript'in tip denetimini 'as any' ile atlıyoruz
       {
         highlightScanRegion: true,
         highlightCodeOutline: true,
-      }
+      } as any
     );
 
     try {
