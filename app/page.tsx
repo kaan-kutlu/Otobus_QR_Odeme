@@ -37,6 +37,8 @@ export default function HomePage() {
   const lastScannedRef = useRef<string>("");
   const [scanning, setScanning] = useState(false);
   const [status, setStatus] = useState<string>("Hazır");
+  const [receipt, setReceipt] = useState<{ amount: number; balance: number } | null>(null);
+  const [receiptVisible, setReceiptVisible] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("");
@@ -204,6 +206,8 @@ export default function HomePage() {
         setBalance(nextBalance);
         setUsedToken(result);
         setToken(createToken());
+        setReceipt({ amount: FARE_AMOUNT, balance: nextBalance });
+        setReceiptVisible(true);
         setStatus(`QR algılandı. ${FARE_AMOUNT} ₺ düşüldü. Yeni QR oluşturuldu.`);
         void stopScanner();
       },
@@ -321,6 +325,19 @@ export default function HomePage() {
           </section>
         </div>
       )}
+
+      {receiptVisible && receipt ? (
+        <div className="receipt-modal-backdrop" onClick={() => setReceiptVisible(false)}>
+          <div className="receipt-modal" onClick={(event) => event.stopPropagation()}>
+            <h3>İşlem Tamamlandı</h3>
+            <p>Alınan Tutar: <strong>{receipt.amount.toFixed(2)} ₺</strong></p>
+            <p>Güncel Bakiye: <strong>{receipt.balance.toFixed(2)} ₺</strong></p>
+            <button type="button" onClick={() => setReceiptVisible(false)}>
+              Kapat
+            </button>
+          </div>
+        </div>
+      ) : null}
     </AppShell>
   );
 }
