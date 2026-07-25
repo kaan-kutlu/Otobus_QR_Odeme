@@ -34,6 +34,7 @@ export default function HomePage() {
   const [balance, setBalance] = useState<number>(readBalanceFromStorage);
   const [token, setToken] = useState<string>(createToken());
   const [usedToken, setUsedToken] = useState<string>("");
+  const lastScannedRef = useRef<string>("");
   const [scanning, setScanning] = useState(false);
   const [status, setStatus] = useState<string>("Hazır");
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
@@ -194,24 +195,17 @@ export default function HomePage() {
     scannerRef.current = new QrScanner(
       videoRef.current,
       (result: string) => {
-        if (result === usedToken) {
-          setUsedToken("");
-          setToken(createToken());
-          setStatus("Bu QR kodu daha önce kullanıldı. Yeni QR oluşturuldu.");
-          void stopScanner();
+        if (result === lastScannedRef.current) {
           return;
         }
 
-        if (result === token) {
-          const nextBalance = Math.max(0, Number((balance - FARE_AMOUNT).toFixed(2)));
-          setBalance(nextBalance);
-          setUsedToken(token);
-          setToken(createToken());
-          setStatus(`QR başarıyla okundu. ${FARE_AMOUNT} ₺ alındı. Yeni QR oluşturuldu.`);
-          void stopScanner();
-        } else {
-          setStatus("Geçersiz QR. Lütfen doğru QR kodunu okutun.");
-        }
+        lastScannedRef.current = result;
+        const nextBalance = Math.max(0, Number((balance - FARE_AMOUNT).toFixed(2)));
+        setBalance(nextBalance);
+        setUsedToken(result);
+        setToken(createToken());
+        setStatus(`QR algılandı. ${FARE_AMOUNT} ₺ düşüldü. Yeni QR oluşturuldu.`);
+        void stopScanner();
       },
       {
         highlightScanRegion: true,

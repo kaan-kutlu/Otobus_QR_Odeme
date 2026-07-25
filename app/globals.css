@@ -260,3 +260,100 @@ input {
   color: #94a3b8;
 }
 
+.logout-button {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .nav-links {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links a,
+  .logout-button {
+    width: auto;
+    min-width: 120px;
+  }
+
+  .page-content {
+    min-height: auto;
+    padding: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 0.85rem;
+  }
+
+  .topbar {
+    padding: 0.85rem;
+    border-radius: 1.25rem;
+  }
+
+  .brand {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .nav-links a,
+  .logout-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-card,
+  .card {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-content {
+    gap: 0.9rem;
+  }
+
+  .form-card {
+    padding: 1rem;
+  }
+
+  .action-row {
+    flex-direction: column;
+  }
+
+  .action-row button {
+    width: 100%;
+  }
+
+  input {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .video-wrapper {
+    max-height: 320px;
+  }
+}
+
