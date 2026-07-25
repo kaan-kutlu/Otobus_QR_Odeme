@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Otobüs QR Biniş Prototipi",
-  description: "Kameradan QR okuma ve bakiye düşme prototipi",
+  title: "Erzincan Belediyesi | QR Biniş Sistemi",
+  description: "Modern QR biniş deneyimi, bakiye takibi ve hızlı erişim",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
